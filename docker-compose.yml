@@ -7,6 +7,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: symfony_docker
       MYSQL_USER: symfony
       MYSQL_PASSWORD: symfony
@@ -14,12 +15,14 @@ services:
       - '4306:3306'
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./my.cnf:/etc/my.cnf
 
   php:
     container_name: php
     build:
       context: ./php
     ports:
+      #fastcgi port served to nginx
       - '9000:9000'
     volumes:
       - ./app:/var/www/symfony_docker
