@@ -1,0 +1,40 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER COMENTARIO
+GET {{baseUrl}}/comentarios/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER COMENTARIOS
+GET {{baseUrl}}/comentarios HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER COMENTARIOS CON FILTROS
+GET {{baseUrl}}/comentarios HTTP/1.1
+  ?query=detalle
+  &order[detalle]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+### CREAR COMENTARIO
+POST {{baseUrl}}/comentarios HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "usuario":"/api/usuarios/1",
+    "detalle":"prueba de detalles 1",    
+    "estadoId":1,
+    "registro":"/api/registros/6",
+    "fecha":"2020-05-20"
+}
+
+### OBTENER COMENTARIOS POR REGISTRO CON FILTROS
+GET {{baseUrl}}/registros/8/comentarios HTTP/1.1
+  ?query=
+  &order[detalle]=asc
+  &page=2
+Authorization: {{AuthorizationToken}}

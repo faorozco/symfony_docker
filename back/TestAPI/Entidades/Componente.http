@@ -1,0 +1,52 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+### OBTENER COMPONENTES
+@id = 1
+GET {{baseUrl}}/componentes HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER COMPONENTE
+@id = 1
+GET {{baseUrl}}/componentes/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ROLES DE UN COMPONENTE
+@id = 1
+GET {{baseUrl}}/componentes/{{id}}/rols HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### NUEVO COMPONENTE 
+POST {{baseUrl}}/componentes HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombre": "Componente Test 4",
+  "tipoComponente": 2,
+  "ayuda": "Ejemplo de ayuda",
+  "link": "/enlacetest",
+  "estadoId": 1,
+  "rols": [
+  		"/api/rols/1",
+  		"/api/rols/2"
+  ]
+}
+
+### ACTUALIZAR COMPONENTE 
+@id=1
+PUT {{baseUrl}}/componentes/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombre": "Componente Test 4",
+  "tipoComponente": 2,
+  "ayuda": "Ejemplo de ayuda",
+  "link": "/enlacetest",
+  "estadoId": 1,
+  "rols": [
+    "/api/rols/1"
+  ]
+}

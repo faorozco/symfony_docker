@@ -1,0 +1,47 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER TERCEROS
+GET {{baseUrl}}/terceros 
+Authorization: {{AuthorizationToken}}
+
+### OBTENER TERCERO
+GET {{baseUrl}}/terceros/{{id}} 
+Authorization: {{AuthorizationToken}}
+
+### TODO: VERIFICAR PETICIONES DE IMPORTAR Y EXPORTAR TERCEROS
+
+### EXPORTAR TERCEROS
+POST {{baseUrl}}/terceros/export 
+Authorization: {{AuthorizationToken}}
+
+### NUEVO TERCERO
+POST {{baseUrl}}/terceros 
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "identificacion":"123456787",
+    "nombre":"prueba 1",
+    "direccion":"Prueba dir 1",
+    "telefono":"318765655",
+    "celular":"318765655",
+    "correoElectronico":"prueba@prueba.com",
+    "estadoId":1,
+    "ciudad":"/api/ciudads/832",
+    "tipo":"Cliente"
+}
+
+### IMPORTAR TERCEROS
+POST {{baseUrl}}/terceros/import 
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="tercero1.csv"
+Content-Type: text/csv
+
+< ../../var/tmpFiles/tercero1.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

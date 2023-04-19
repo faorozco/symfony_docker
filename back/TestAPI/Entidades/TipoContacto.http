@@ -1,0 +1,12 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/tipo_contactos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/tipo_contactos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

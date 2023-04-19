@@ -1,0 +1,69 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER AUCITORIAS
+GET {{baseUrl}}/auditorias HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER AUDITORIAS CON FILTROS
+GET {{baseUrl}}/auditorias HTTP/1.1
+    ?query=
+    &entidad=formulario
+    &fecha[after]=2019-11-21T05:00:00.000Z
+    &fecha[before]=2020-11-29T05:00:00.000Z
+    &usuario=1
+    &estado_id=1
+    &order[id]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+###OBTENER AUDITORIAS DE UN RADICADO
+GET {{baseUrl}}/auditorias HTTP/1.1
+    ?query=
+    &entidad=
+    &entidad_id=
+    &fecha[after]=
+    &fecha[before]=
+    &usuario=
+    &estado_id=
+    &order[id]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER CIUDAD
+GET {{baseUrl}}/auditorias/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CREAR CIUDAD
+POST {{baseUrl}}/auditorias HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "nombre":"Ciudad Prueba",
+    "codigo":"99774",    
+    "estadoId":1
+}
+
+### ACTUALIZAR AUDITORIA
+PUT {{baseUrl}}/auditorias/1124 HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "nombre":"Ciudad Prueba 2",
+    "codigo":"99774",    
+    "estadoId":1
+}
+
+
+###OBTENER AUDITORIAS CON FILTROS
+GET {{baseUrl}}/auditorias HTTP/1.1
+    ?entidad=Cargo
+    &entidad_id=1
+    &estado_id=1
+Authorization: {{AuthorizationToken}}

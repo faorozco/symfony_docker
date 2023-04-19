@@ -1,0 +1,38 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/empresas HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/empresas/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER EMPRESA FILTRADA
+GET {{baseUrl}}/empresas HTTP/1.1
+    ?query=
+    &order[posicion]=asc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+### CARGAR LOGO DE LA EMPRESA 
+@id=1
+POST {{baseUrl}}/empresas/{{id}}/imagen HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="imagen"; filename="logo.png"
+Content-Type: image/png
+
+< ../../var/tmpFiles/logo.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### MOSTRAR LOGO DE LA EMPRESA 
+GET {{baseUrl}}/empresas/{{id}}/imagen HTTP/1.1
+Authorization: {{AuthorizationToken}}

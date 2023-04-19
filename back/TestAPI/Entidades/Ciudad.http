@@ -1,0 +1,46 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER CIUDADES
+GET {{baseUrl}}/ciudads HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER CIUDADES CUSTOM
+GET {{baseUrl}}/ciudads HTTP/1.1
+    ?query=|isInactiveOnly
+    &order[nombre]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER CIUDAD
+GET {{baseUrl}}/ciudads/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CREAR CIUDAD
+POST {{baseUrl}}/ciudads HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "nombre":"Ciudad Prueba 6",
+    "codigo":"99779",    
+    "estadoId":1
+}
+
+### ACTUALIZAR CIUDAD
+PUT {{baseUrl}}/ciudads/1171 HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "nombre":"Ciudad Prueba 34",
+    "codigo":"99775",    
+    "estadoId":1
+}
+
+### BORRAR CIUDAD
+DELETE {{baseUrl}}/ciudads/1172 HTTP/1.1
+Authorization: {{AuthorizationToken}}

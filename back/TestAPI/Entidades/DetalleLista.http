@@ -1,0 +1,19 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER DETALLE DE LISTAS
+GET {{baseUrl}}/detalle_listas HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER  DETALLE DE LISTAS
+GET {{baseUrl}}/detalle_listas HTTP/1.1
+  ?query=
+  &order[nombre]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+### OBTENER  DETALLE DE LISTA
+GET {{baseUrl}}/detalle_listas/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

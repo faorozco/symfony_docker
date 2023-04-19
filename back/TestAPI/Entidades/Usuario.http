@@ -1,0 +1,171 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+@id = 2
+
+### OBTENER TODOS LOS USUARIOS USUARIOS
+GET {{baseUrl}}/usuarios HTTP/1.1
+  ?page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER USUARIOS CON FILTROS
+GET {{baseUrl}}/usuarios HTTP/1.1
+  ?query=
+  &order[login]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+### OBTENER UN USUARIO
+GET {{baseUrl}}/usuarios/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER IMAGEN DE UN USUARIO
+GET {{baseUrl}}/usuarios/{{id}}/imagen HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CARGAR UNA IMAGEN DE UN USUARIO
+POST {{baseUrl}}/usuarios/{{id}}/imagen
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="imagen"; filename="testprofile.png"
+Content-Type: image/png
+
+< ../../var/tmpFiles/testprofile.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### OBTENER UN USUARIO POR LOGIN
+GET {{baseUrl}}/usuarios/getbylogin?login=cperez HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER COMPONENTES POR USUARIO
+GET {{baseUrl}}/usuarios/{{id}}/componentesbyusuario HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CREAR USUARIO SIN ASIGNAR GRUPOS, ROLES, PROCESO Y CARGO
+
+POST {{baseUrl}}/usuarios/special HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "login": "cperez9",
+  "numeroDocumento": "10011184",
+  "procesoId": 39,
+  "cargoId": 1,
+  "apellido1": "Pérez",
+  "apellido2": "Rivera",
+  "nombre1": "Carlos",
+  "nombre2": "Alfonso",
+  "celular": "3217507606",
+  "email": "ingcarlosperez@gmail.com",
+  "telefonoFijoResidencia": "3207308",
+  "direccionResidencia": "test dir",
+  "genero": "M",
+  "fechaNacimiento": "2018-09-07",
+  "clave": "123",
+  "imagen": "1",
+  "estadoId": 1
+}
+
+### ACTUALIZAR USUARIO SIN ASIGNAR GRUPOS, ROLES, PROCESO Y CARGO
+
+PUT {{baseUrl}}/usuarios/{{id}}/special HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "login": "cperez8-1",
+  "numeroDocumento": "10011184",
+  "procesoId": 52,
+  "cargoId": 2,
+  "apellido1": "Pérez",
+  "apellido2": "Rivera",
+  "nombre1": "Carlos",
+  "nombre2": "Alfonso",
+  "celular": "3217507606",
+  "email": "ingcarlosperez@gmail.com",
+  "telefonoFijoResidencia": "3207308",
+  "direccionResidencia": "test dir",
+  "genero": "M",
+  "fechaNacimiento": "2018-09-07",
+  "clave": "123",
+  "imagen": "1",
+  "estadoId": 1
+}
+
+### CREAR USUARIO
+
+POST {{baseUrl}}/usuarios HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "login": "cperez7",
+  "procesoId": 1,
+  "numeroDocumento": "10011184",
+  "apellido1": "Pérez",
+  "apellido2": "Rivera",
+  "nombre1": "Carlos",
+  "nombre2": "Alfonso",
+  "celular": "3217507606",
+  "email": "ingcarlosperez@gmail.com",
+  "telefonoFijoResidencia": 3207308,
+  "direccionResidencia": "test dir",
+  "genero": "M",
+  "fechaNacimiento": "2018-09-07",
+  "clave": "123",
+  "imagen": "1",
+  "rols": [
+  	"/api/rols/1",
+  	"/api/rols/2"
+  	],
+  "grupos": [
+  	"/api/grupos/1",
+  	"/api/grupos/2"
+  	],
+  "estadoId": 1
+  }
+
+### OBTENER GRUPOS DE UN USUARIO
+GET {{baseUrl}}/usuarios/1/grupos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ROLES DE UN USUARIO
+GET {{baseUrl}}/usuarios/42/rols HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+
+### ACTUALIZAR SEDE USUARIO
+
+
+PUT {{baseUrl}}/usuarios/21/special HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "sedeId": "2"
+}
+
+
+
+
+
+### obtener usuarios
+
+POST {{baseUrl}}/v2/users/ HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "login": "smejia",
+  "estado": 0,
+  "bloqueo": 0,
+  "sesion": 0,
+  "page": 1,
+  "size": 10,
+  "orden": "ASC"
+}

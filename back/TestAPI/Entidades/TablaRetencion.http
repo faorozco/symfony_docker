@@ -1,0 +1,69 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 6
+### ROLES
+
+###OBTENER TABLA RETENCION SPECIAL
+GET {{baseUrl}}/tabla_retencions/{{id}}/special HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER TABLAS RETENCION SPECIAL
+GET {{baseUrl}}/tabla_retencions/special
+    ?query=Egreso
+    &order[version]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+
+###OBTENER TABLA RETENCION SPECIAL
+PUT {{baseUrl}}/tabla_retencions/1 HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "tiempoRetencionArchivoGestion":"",
+   "unidadRetencionArchivoGestion":"",
+   "tiempoRetencionArchivoCentral":"",
+   "unidadRetencionArchivoCentral":"",
+   "tipoSoporte":"",
+   "disposicionFinalBorrar":false,
+   "disposicionFinalConservacionTotal":false,
+   "disposicionFinalConservacionDigital":false,
+   "disposicionFinalMicrofilmado":false,
+   "disposicionFinalSeleccion":false,
+   "procedimientoDisposicion":"",
+   "inicioVigencia":"2019-12-04T00:00:00+00:00",
+   "leyNormatividad":"",
+   "disposicionFinalDigitalizacionMicrofilmacion":false,
+   "disposicionFinalMigrar":false,
+   "estadoId":1,
+   "estructuraDocumentalId":70,
+   "estructuraDocumental":"/api/estructura_documentals/70"
+}
+
+
+###ACTUALIZAR VALORES DOCUMENTALES - TABLA RETENCION
+PUT {{baseUrl}}/tabla_retencions/{{id}}/valordocumentals HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "valordocumentals": [
+        "2",
+        "3"
+    ]
+}
+
+###GENERAR VERSIÓN TABLA DE RETENCION
+GET {{baseUrl}}/tabla_retencions/generateversion HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER VERSIONES TABLA DE RETENCION
+GET {{baseUrl}}/tabla_retencions/getversions HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER VERSION ACTUAL TABLA DE RETENCION
+GET {{baseUrl}}/tabla_retencions/getcurrentversion HTTP/1.1
+Authorization: {{AuthorizationToken}}

@@ -1,0 +1,15 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/tipo_documentals HTTP/1.1
+    ?query=
+    &order[descripcion]=asc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/tipo_documentals/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

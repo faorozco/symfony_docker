@@ -1,0 +1,38 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 51
+
+### OBTENER PROCESOS
+GET {{baseUrl}}/procesos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER PROCESO
+GET {{baseUrl}}/procesos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER PROCESOS FILTRADO
+GET {{baseUrl}}/procesos HTTP/1.1
+    ?query=
+    &order[nombre]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+### IMPORTAR PROCESOS
+POST {{baseUrl}}/procesos/import HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="procesos1.csv"
+Content-Type: text/csv
+
+< ../../var/tmpFiles/procesos1.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### EXPORTAR PROCESOS
+POST {{baseUrl}}/procesos/export HTTP/1.1
+Authorization: {{AuthorizationToken}}

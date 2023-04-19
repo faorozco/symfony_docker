@@ -1,0 +1,146 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+### OBTENER DOCUMENTOS ESTRUCTURA DOCUMENTAL FILTRADOS
+@id = 12
+GET {{baseUrl}}/estructura_documentals 
+    ?page=1
+    &order[id]=desc
+    &query=
+Authorization: {{AuthorizationToken}}
+
+### OBTENER DOCUMENTOS ESTRUCTURA DOCUMENTAL FILTRADO POR ID
+GET {{baseUrl}}/estructura_documentals/2 
+    ?page=1
+    &order[id]=desc
+    &query=
+Authorization: {{AuthorizationToken}}
+
+### CREAR NODOS EN ESTRUCTURA DOCUMENTAL
+POST {{baseUrl}}/estructura_documentals 
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "codigoDirectorio":" 9000 ",
+    "descripcion":"  hola7  ",
+    "codigoDirectorioPadre":"",
+    "idEstructura":"",
+    "estadoId":1
+}
+
+### CREAR NODOS EN ESTRUCTURA DOCUMENTAL CON VALIDACIONES
+POST {{baseUrl}}/estructura_documentals/save 
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "codigoDirectorio":"",
+    "descripcion":"hola 9111",
+    "codigoDirectorioPadre":"",
+    "idEstructura":"",
+    "estadoId":1
+}
+
+
+### OBTENER DOCUMENTOS ESTRUCTURA DOCUMENTAL FILTRADOS
+@id = 1
+GET {{baseUrl}}/estructura_documentals/nonrelated 
+    ?page=1
+    &order[codigo_directorio]=asc
+    &query=
+Authorization: {{AuthorizationToken}}
+
+### OBTENER DOCUMENTOS ESTRUCTURA DOCUMENTAL
+@id = 1
+GET {{baseUrl}}/estructura_documentals/296/getdocuments 
+    ?page=1
+    &order[id]=desc
+    &query=
+Authorization: {{AuthorizationToken}}
+
+### OBTENER NODOS HIJOS ESTRUCTURA DOCUMENTAL
+GET {{baseUrl}}/estructura_documentals/getestructurabynode 
+    ?node=20105502&mostrarpeso=1
+Authorization: {{AuthorizationToken}}
+
+
+### COLOCAR TIPOS DE NODO AL CUADRO DE CLASIFICACIÓN DOCUMENTAL
+### types
+### > tipo_documental
+### > subserie
+### > serie
+### > subseccion
+### > seccion
+### > fondo
+
+PUT {{baseUrl}}/estructura_documentals/43     
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "type":"subserie"    
+}
+
+### ACTUALIZAR NODOS HIJO DE UN NODO PADRE CUANDO SE CAMBIE EL CÓDIGO DE ESTE
+PUT {{baseUrl}}/estructura_documentals/4     
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+# {
+#     "codigoDirectorio":"2001",
+#     "descripcion":"GESTION ADMINISTRATIVA Y FINANCIERA",
+#     "id":4,
+#     "codigoDirectorioPadre":"",
+#     "estadoId":1
+# }
+
+{"codigoDirectorio":"108","descripcion":"Prueba","id":4,"codigoDirectorioPadre":"","estadoId":1}
+
+
+### OBTENER ELEMENTOS DE LA ESTRUCTURA DOCUMENTAL QUE SEAN TIPOS DOCUMENTALES
+@id = 1
+GET {{baseUrl}}/estructura_documentals/tiposdocumentals
+    ?page=1
+    &query=
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ELEMENTO DE LA ESTRUCTURA DOCUMENTAL
+@id = 70
+GET {{baseUrl}}/estructura_documentals/tiposdocumentals/{{id}} 
+    ?page=1
+    &query=
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER TRD POR VERSION
+GET {{baseUrl}}/estructura_documentals/getxlstrd/-1/-1
+Authorization: {{AuthorizationToken}}
+
+
+### VERIFICAR DUPLICIDAD CODIGO DIRECTORIO
+GET {{baseUrl}}/estructura_documentals/codigodirectorio/1000/checkduplicate/true
+Authorization: {{AuthorizationToken}}
+
+### INACTIVAR ESTRUCTURA DOCUMENTAL
+POST {{baseUrl}}/estructura_documentals/{{id}}/inactivate
+Authorization: {{AuthorizationToken}}
+
+
+### EXPORTAR ESTRUCTURA DOCUMENTAL
+POST {{baseUrl}}/estructura_documentals/export     
+Authorization: {{AuthorizationToken}}
+
+
+### IMPORTAR ESTRUCTURA DOCUMENTAL
+### IMPORTAR CONTACTOS
+POST {{baseUrl}}/estructura_documentals/import 
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="estructura_documental_short.csv"
+Content-Type: text/csv
+
+< ../../var/tmpFiles/estructura_documental_short.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,31 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER SEDES
+GET {{baseUrl}}/sedes HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER SEDE
+GET {{baseUrl}}/sedes/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### GUARDAR SEDE
+PUT {{baseUrl}}/sedes/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "codigoInterno":"1234",
+   "nombre":"Dosquebradas",
+   "direccion":"Diagonal 23D 21T-144 La Pradera 1112",
+   "pbx":"3396529",
+   "celular":"3175151456",
+   "email":"info@globaldoc.info",
+   "url":"www.globaldoc.info",
+   "empresaId":1,
+   "estadoId":1,
+   "empresa":"/api/empresas/1"
+}

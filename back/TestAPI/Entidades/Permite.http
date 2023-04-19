@@ -1,0 +1,54 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER PASO
+GET {{baseUrl}}/permites HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER PASOS
+GET {{baseUrl}}/permites/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER OPCIONES DE UN FORMULARIO
+GET {{baseUrl}}/formularios/2/opciones HTTP/1.1    
+Authorization: {{AuthorizationToken}}
+
+### GUARDAR OPCIONES DE UN FORMULARIO
+POST {{baseUrl}}/opcion_formularios_many HTTP/1.1    
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+[
+   {
+      "formulario_id":"1",
+      "permite_id":"1",
+      "grupos":"{'grupos':[{'id': '1', 'nombre': 'Administradores'}, {'id': '3', 'nombre': 'Digitalizadores'}, {'id': '6', 'nombre': 'Consultoría'}]}"
+   },
+   {
+      "formulario_id":"1",
+      "permite_id":"2",
+      "grupos":"{'grupos':[{'id': '1', 'nombre': 'Administradores'}, {'id': '3', 'nombre': 'Digitalizadores'}, {'id': '6', 'nombre': 'Consultoría'}]}",
+      "acciones_grupo": {"nombre":"bajar_archivo", "grupos": [{"id": 1, "nombre": "Administradores"}, {"id": 6, "nombre": "Consultoría"}], "subir_archivo": [{"id": 1, "nombre": "Administradores"}, {"id": 6, "nombre": "Consultoría"}]}
+   }
+]
+
+### ELIMINAR OPCIONES DE UN FORMULARIO
+
+DELETE {{baseUrl}}/opcion_formularios_delete/2 HTTP/1.1    
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER PERMITES DE UN FORMULARIO
+GET {{baseUrl}}/permites_formularios/2 HTTP/1.1    
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER PERMITES DE UN FORMULARIO CONSULTANDO TIPO DOCUMENTAL EN  REGISTRO
+GET {{baseUrl}}/permites_formularios/2/registros/1 HTTP/1.1    
+Authorization: {{AuthorizationToken}} 
+
+### ARBOL DE ESTRUCTURA DOCUMENTAL
+GET {{baseUrl}}/estructura_documentals/getxlstrd/001/1 HTTP/1.1    
+Authorization: {{AuthorizationToken}}

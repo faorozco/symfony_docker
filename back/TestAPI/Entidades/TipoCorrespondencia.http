@@ -1,0 +1,36 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER tipo_correspondencias
+GET {{baseUrl}}/tipo_correspondencias HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER TIPOCORRESPONDENCIA
+GET {{baseUrl}}/tipo_correspondencias/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CREAR TIPOCORRESPONDENCIA
+POST {{baseUrl}}/tipo_correspondencias HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "nombre":"TIPOCORRESPONDENCIA NUEVO",    
+    "estadoId":1
+}
+
+### ACTUALIZAR TIPOCORRESPONDENCIA
+PUT {{baseUrl}}/tipo_correspondencias/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "nombre":"ACTUALIZAR TIPOCORRESPONDENCIA NUEVO",    
+    "estadoId":1
+}
+
+### BORRAR TIPOCORRESPONDENCIA
+DELETE {{baseUrl}}/tipo_correspondencias/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

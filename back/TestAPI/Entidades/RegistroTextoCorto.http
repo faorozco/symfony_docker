@@ -1,0 +1,13 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 2
+
+### OBTENER REGISTROS DE TIPO ENTIDAD
+GET {{baseUrl}}/registro_texto_cortos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER REGISTRO DE TIPO ENTIDAD
+GET {{baseUrl}}/registro_texto_cortos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+

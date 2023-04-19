@@ -1,0 +1,89 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: "../src/*"
+    exclude: "../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}"
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\:
+    resource: "../src/Controller"
+    tags: ["controller.service_arguments"]
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+  # App\EventSubscriber\AuditorSubscriber:
+  #   tags:
+  #     - { name: doctrine.event_listener, event: postPersist }
+  #     - { name: doctrine.event_listener, event: onFlush }
+  App\EventListener\AuditorListener:
+        tags:
+            -
+                name: 'doctrine.event_listener'
+                event: 'postPersist'
+                priority: 500
+                connection: 'default'
+            -
+                name: 'doctrine.event_listener'
+                event: 'postUpdate'
+                priority: 500
+                connection: 'default'
+            -
+                name: 'doctrine.event_listener'
+                event: 'preRemove'
+                priority: 500
+                connection: 'default'
+
+  App\EventListener\EstructuraDocumentalListener:
+        tags:
+            -
+                name: 'doctrine.event_listener'
+                event: 'preUpdate'
+                priority: 500
+                connection: 'default'
+
+  acme_api.event.jwt_created_listener:
+        class: App\EventListener\JwtListener
+        arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }
+
+
+  app.listener.authentication_success_response:
+        class: App\EventListener\JwtListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }            
+
+  acme_api.event.jwt_expired_listener:
+        class: App\EventListener\JwtListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onJWTExpired }
+
+  acme_api.event.authentication_failure_listener:
+      class: App\EventListener\JwtListener
+      tags:
+          - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+
+
+  App\EventListener\DatabaseActivitySubscriber:
+        tags:
+            - name: 'doctrine.event_subscriber'
+              connection: 'default'
+
+  App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

@@ -1,0 +1,110 @@
+
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+@id = 1
+
+
+###OBTENER CONSULTAS MAESTRAS
+GET {{baseUrl}}/consulta_maestras 
+    ?query=
+    &order[nombre_sede]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+###OBTENER CONSULTA MAESTRA
+GET {{baseUrl}}/consulta_maestras/{{id}} 
+    ?query=
+    &order[nombre_sede]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+###EJECUTAR CONSULTA MAESTRA
+GET {{baseUrl}}/consulta_maestras/{{id}}/execute 
+    ?query=
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+###EXPORTAR CONSULTA MAESTRA
+GET {{baseUrl}}/consulta_maestras/{{id}}/export 
+    ?query=
+Authorization: {{AuthorizationToken}}
+
+###EJECUTAR CONSULTA MAESTRA PERSONALIZADA
+POST {{baseUrl}}/consulta_maestras/execute/customquery
+    ?query=
+    &page=1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "query":"",
+   "page":"1",
+   "detalle_consulta":[
+      {
+         "operador":" ",
+         "idCampo":136,
+         "campo":136,
+         "condicion":"contiene",
+         "valor":"comfamiliar",
+         "descripcionCampo":"Cliente"
+      },
+      {
+         "operador":"O",
+         "idCampo":169,
+         "campo":169,
+         "condicion":"contiene",
+         "valor":"Carlos",
+         "descripcionCampo":"Ingeniero de Servicio"
+      }
+   ],
+   "formulario_id":58
+}
+
+###EXPORTAR CONSULTA MAESTRA PERSONALIZADA
+POST {{baseUrl}}/consulta_maestras/export/customquery 
+    ?query=
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "formulario_id":2,
+   "detalle_consulta":[
+         {
+            "operador":" ",
+            "idCampo":5,"campo":5,
+            "condicion":"contiene",
+            "valor":" ",
+            "descripcionCampo":"Nombres y Apellidos Completos"
+         }
+      ],
+      "query":""
+}
+
+### GUARDAR CONSULTA MAESTRA
+POST {{baseUrl}}/consulta_maestras 
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "formulario":"/api/formularios/1",
+   "nombre":"test consulta",
+   "detalle_consulta":[
+      {
+         "operador":" ",
+         "idCampo":30,
+         "campo":30,
+         "condicion":"contiene",
+         "valor":"a",
+         "descripcionCampo":"Descripción"
+      }
+   ],
+   "detalle":"[{\"operador\":\" \",\"idCampo\":30,\"campo\":30,\"condicion\":\"contiene\",\"valor\":\"a\",\"descripcionCampo\":\"Descripción\"}]",
+   "grupos":[
+      "/api/grupos/1"
+   ],
+   "roles":[],
+   "estadoId":1,
+   "grupo":[],
+   "nombre_consulta_maestra":"test consulta"
+}

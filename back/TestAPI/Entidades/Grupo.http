@@ -1,0 +1,77 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+### OBTENER GRUPOS
+@id=1
+GET {{baseUrl}}/grupos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER GRUPOS FILTRADOS
+@id=1
+GET {{baseUrl}}/grupos HTTP/1.1
+    ?query=
+    &order[nombre]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER UN GRUPO
+@id=1
+GET {{baseUrl}}/grupos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### NUEVO GRUPO
+
+POST {{baseUrl}}/grupos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombre": "Test23",
+  "estadoId": 1,
+  "modo": "U",
+  "usuarios": [
+  		"/api/usuarios/1"
+  ]
+}
+
+### ACTUALIZAR GRUPO
+@id=15
+PUT {{baseUrl}}/grupos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombre": "Test2",
+  "estadoId": 1,
+  "modo": "U",
+  "usuarios": [
+  		"/api/usuarios/1",
+      "/api/usuarios/2"
+  ]
+}
+
+
+
+### ACTUALIZAR GRUPO
+@id=15
+PUT {{baseUrl}}/grupos/6/update HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "estadoId":1,
+  "nombre":"4010-CONSULTORIA GESTIÓN DOCUMENTAL",
+  "usuarios":[
+    "/api/usuarios/7",
+    "/api/usuarios/1",
+    "/api/usuarios/9"
+  ]
+}
+
+
+###OBTENER USUARIOS DE UN GRUPO
+@id = 1
+GET {{baseUrl}}/grupos/{{id}}/usuarios HTTP/1.1
+Authorization: {{AuthorizationToken}}

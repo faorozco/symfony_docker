@@ -1,0 +1,35 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER NOTIFICADOS
+GET {{baseUrl}}/notificados HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER NOTIFICADO
+GET {{baseUrl}}/notificados/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER NOTIFICADOS FILTRADOS
+GET {{baseUrl}}/notificados/user HTTP/1.1
+    ?page=1
+    &order[id]=desc
+    &estadoTarea=1
+    &tipoFormulario=4
+    &visto=false
+Authorization: {{AuthorizationToken}}
+
+
+### MARCAR NOTIFICACION COMO VISTA
+POST {{baseUrl}}/notificados/{{id}}/seen HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "para": "[\"1\",\"2\"]",
+  "contenido": "Este es el mensaje 122222",
+  "estadoId": 1,
+  "notificado": false,
+  "registro": "/api/registros/1"
+}

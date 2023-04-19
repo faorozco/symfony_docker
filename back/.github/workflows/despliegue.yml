@@ -1,0 +1,81 @@
+name: Deploy GdocBack
+on:
+  #when merge to branch
+  pull_request:
+    branches: [ develop, release, Master ]
+    types: [ closed ]
+
+jobs:
+  update:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    name: copia scp
+    steps:
+
+      - name: set variable for develop
+        if: ${{ github.ref_name == 'develop' }}
+        run:
+          echo "AMBIENTE=desarrollo" >> $GITHUB_ENV
+
+      - name: set variable for release
+        if: ${{ github.ref_name == 'release' }}
+        run:
+          echo "AMBIENTE=calidad" >> $GITHUB_ENV
+
+      - name: set variable for produccion
+        if: ${{ github.ref_name == 'Master' }}
+        run:
+          echo "AMBIENTE=produccion" >> $GITHUB_ENV
+
+      - uses: actions/checkout@master
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: "*"
+          target: "${{ env.AMBIENTE }}/back"
+
+  after-update:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    needs: update
+    runs-on: ubuntu-latest
+
+    name: script local
+    steps:
+
+      - name: set variable for develop
+        if: ${{ github.ref_name == 'develop' }}
+        run:
+          echo "AMBIENTE=desarrollo" >> $GITHUB_ENV
+
+      - name: set variable for release
+        if: ${{ github.ref_name == 'release' }}
+        run:
+          echo "AMBIENTE=calidad" >> $GITHUB_ENV
+
+      - name: set variable for produccion
+        if: ${{ github.ref_name == 'Master' }}
+        run:
+          echo "AMBIENTE=produccion" >> $GITHUB_ENV
+
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: ~/${{ env.AMBIENTE }}/action_upd_back.sh
+
+  closed_without_merge:
+    if: github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: closed without merge
+        run: 
+          echo PR #${{ github.event.number }} has been closed without being merged

@@ -1,0 +1,19 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ENTIDADES
+GET {{baseUrl}}/entidads HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ENTIDADES FILTRADAS
+GET {{baseUrl}}/entidads HTTP/1.1
+  ?query=ciuda
+  &order[nombre]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/entidads/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

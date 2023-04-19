@@ -1,0 +1,13 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ENTIDADES
+GET {{baseUrl}}/enviados HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/enviados/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

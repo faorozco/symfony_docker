@@ -1,0 +1,218 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 32
+
+###VER UN REGISTRO
+GET {{baseUrl}}/registros/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###VER STICKER DE UN REGISTRO
+GET {{baseUrl}}/registros/{{id}}/sticker HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###IMPRIMIR STICKER DE UN REGISTRO
+GET {{baseUrl}}/registros/{{id}}/sticker/print 
+    ?type=barras&location=---middle_center---
+Authorization: {{AuthorizationToken}}
+
+###MEZClAR REGISTRO CON PLANTILLA SELECCIONADA
+@plantilla_id=1
+GET {{baseUrl}}/registros/{{id}}/plantillas/{{plantilla_id}}/mix HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER REGISTROS NOTIFICADOS
+GET {{baseUrl}}/registros/{{id}}/notificados HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER REGISTROS RELACIONADOS
+GET {{baseUrl}}/registros/{{id}}/relacionados HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER REGISTROS RELACIONADOS
+GET {{baseUrl}}/registros/{{id}}/campos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER CREDENCIALES REGISTRO
+GET {{baseUrl}}/registros/{{id}}/credentials HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER CABECERA DEL REGISTRO
+GET {{baseUrl}}/registros/{{id}}/header HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER REGISTROS DE UN USUARIO
+GET {{baseUrl}}/registros/byuser
+    ?query=
+    &order[id]=asc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER PLANTILLAS RELACIONADAS CON UN REGISTRO
+GET {{baseUrl}}/registros/{{id}}/formulario/plantillas HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER AUDITORIA DE UN REGISTRO
+GET {{baseUrl}}/registros/{{id}}/auditoria HTTP/1.1
+    ?query=
+    &order[nombre]=asc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### GUARDAR ARCHIVO REGISTRO
+POST {{baseUrl}}/registros/{{id}}/savefile HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="version"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="comentario"
+
+Video de prueba
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="video.mp4"
+Content-Type: video/mp4
+
+< ../../var/tmpFiles/video.mp4
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### GUARDAR ARCHIVO PNG
+POST {{baseUrl}}/registros/{{id}}/savefile HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="version"
+
+7
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="comentario"
+
+Periodico 1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="foto.png"
+Content-Type: image/png
+
+< ../../var/tmpFiles/foto.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### GUARDAR ARCHIVO PDF
+POST {{baseUrl}}/registros/{{id}}/savefile HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="version"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="comentario"
+
+Periodico 1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="TRD-Tablas-de-RetenciOn-Documental.pdf"
+Content-Type: application/pdf
+
+< ../../var/tmpFiles/TRD-Tablas-de-RetenciOn-Documental.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### GUARDAR REGISTRO FORMULARIO
+POST {{baseUrl}}/registros/save HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "formulario":"4",
+   "radicacion":"",
+   "fecha_hora":"2020-07-24",
+   "resumen":"",
+   "estadoId":"1",
+   "tipo_correspondencia" : "4",
+   "registros":{
+      "respuestas":[
+         {
+            "campo_formulario_id":8,
+            "valor":"123345",
+            "id":"3-4",
+            "campo":"Formulario",
+            "idRegistro":null
+         },
+         {
+            "campo_formulario_id":12,
+            "valor":"Dirección de prueba",
+            "campo":"TextoCorto",
+            "idRegistro":null
+         }
+      ]
+   }
+}
+
+# {
+#    "formulario":"14",
+#    "radicacion":"",
+#    "fecha_hora":"2020-05-02",
+#    "resumen":"",
+#    "estadoId":"1",
+#    "registros":{
+#       "respuestas":[
+#          {
+#             "campo_formulario_id":12,
+#             "valor":5,
+#             "campo":"Entidad",
+#             "idRegistro":null
+#          },
+#          {
+#             "campo_formulario_id":17,
+#             "valor":"2020-05-02T05:00:00.000Z",
+#             "campo":"Fecha",
+#             "idRegistro":null
+#          }, 
+#          {
+#             "campo_formulario_id":15,
+#             "valor":"Descripción de las series y subseries",
+#             "campo":"TextoCorto",
+#             "idRegistro":null
+#          } 
+#       ]
+#    }
+# }
+
+
+### CARGAR ARCHIVOS RELACIONADOS A UN REGISTRO
+GET {{baseUrl}}/registros/1/archivos
+    ?query=
+    &order[nombre]=asc
+    &page=
+Authorization: {{AuthorizationToken}}
+
+
+@id = 34
+### GUARDAR ARCHIVO EN FORMULARIO RELACIONADO
+POST {{baseUrl}}/registros/{{id}}/savefile HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="version"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="comentario"
+
+Test form relacionado
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="formulariorelacionado"
+
+6
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="TRD-Tablas-de-RetenciOn-Documental.pdf"
+Content-Type: application/pdf
+
+< ../../var/tmpFiles/TRD-Tablas-de-RetenciOn-Documental.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

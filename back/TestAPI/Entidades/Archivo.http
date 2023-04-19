@@ -1,0 +1,30 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/archivos
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/archivos/{{id}}
+Authorization: {{AuthorizationToken}}
+
+### DESCARGAR ARCHIVO
+GET {{baseUrl}}/archivos/{{id}}/download
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER ARCHIVOS CON FILTROS
+GET {{baseUrl}}/archivos
+  ?query=
+  &order[nombre]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER ARCHIVOS REMOTOS GRANDES
+GET {{baseUrl}}/archivos/getremotefiles
+  ?query=2020
+Authorization: {{AuthorizationToken}}

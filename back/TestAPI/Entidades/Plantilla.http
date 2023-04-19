@@ -1,0 +1,12 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER PLANTILLAS
+GET {{baseUrl}}/plantillas HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER PLANTILLA
+GET {{baseUrl}}/plantillas/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

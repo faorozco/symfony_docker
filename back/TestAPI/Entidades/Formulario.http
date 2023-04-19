@@ -1,0 +1,196 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+@id = 10
+
+### OBTENER FORMULARIOS
+GET {{baseUrl}}/formularios
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER FORMULARIO
+GET {{baseUrl}}/formularios/{{id}}
+Authorization: {{AuthorizationToken}}
+
+### OBTENER FORMULARIO
+GET {{baseUrl}}/formularios/byuser
+    ?query=
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER GRUPOS DE UN FORMULARIO
+GET {{baseUrl}}/formularios/{{id}}/grupos
+Authorization: {{AuthorizationToken}}
+
+### OBTENER FORMULARIO FILTRADO
+GET {{baseUrl}}/formularios
+    ?query=
+    &order[campo]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER CAMPOS BASICOS DE UN FORMULARIO
+GET {{baseUrl}}/formularios/1/campo_formularios/basic
+    ?query=
+    &order[campo]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER GRUPOS DE UN FORMULARIO
+GET {{baseUrl}}/formularios/22/campos_form/29
+    ?query=
+    &order[campo]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### ACTUALZIAR REGISTRO DE UN FORMULARIO
+
+PUT {{baseUrl}}/update_campo_formularios
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "registro" : 13,
+    "respuestas":[
+{
+	"campo": "Opcion",
+	"campo_formulario_id": 27,
+	"idRegistro": 11,
+	"valor": 2
+}
+]
+}
+
+
+### DUPLICAR FORMULARIO
+POST {{baseUrl}}/formularios/{{id}}/duplicate
+Authorization: {{AuthorizationToken}}
+
+### DUPLICAR FORMULARIO
+POST {{baseUrl}}/formularios/{{id}}/generarestructuramodelo
+Authorization: {{AuthorizationToken}}
+
+###FORMULARIOS POR USUARIO
+GET {{baseUrl}}/formularios/byuser
+    ?query=
+Authorization: {{AuthorizationToken}}
+
+### OBTENER CAMPOS DE UN FORMULARIO
+GET {{baseUrl}}/formularios/{{id}}/campo_formularios
+    ?query=
+    &order[posicion]=asc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER FORMULARIOS POR TIPO DE FORMULARIO
+GET {{baseUrl}}/formularios
+    ?query=
+    &order[posicion]=asc
+    &page=1
+    &tipo_formulario=5
+Authorization: {{AuthorizationToken}}
+
+
+### NUEVO FORMULARIO
+POST {{baseUrl}}/formularios
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "nomenclaturaFormulario":"01",
+   "tipoSticker":"qr",
+   "version": 1,
+   "fechaVersion":"2019-05-01T00:00:00-05:00",
+   "inicioVigencia":"2019-05-10T00:00:00-05:00",
+   "finVigencia":"2019-05-10T00:00:00-05:00",
+   "generaPdfConFirmaDigital":false,
+   "generaPdfSinFirmaDigital":false,
+   "permiteNotificar":true,
+   "requiereArchivo":true,
+   "permiteCompartir":true,
+   "permiteComentario":true,
+   "permiteFormatos":true,   
+   "ayuda":"Este formulario es una prueb DE AYUDA 3",
+   "radicadoElectronico":false,
+   "estadoId":1,
+   "tipoFormulario":0,
+   "permiteMetodosAutenticacion":true
+}
+
+### ACTUALIZAR FORMULARIO
+PUT {{baseUrl}}/formularios/36
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "version": 0,
+  "fechaVersion": "2018-09-13T22:58:47.786Z",
+  "nombre": "Formulario Prueba 124",
+  "formularioPadre": 0,
+  "nomenclaturaFormulario": "string",
+  "permiteNotificar": true,
+  "requiereArchivo": true,
+  "permiteCompartir": true,
+  "permiteComentario": true,
+  "formularioTransversal": true,
+  "permiteTareas": true,
+  "permiteFormatos": true,
+  "permiteMetodosAutenticacion": false,
+  "tipoFormulario": 3,
+  "generaPdfConFirmaDigital": true,
+  "generaPdfSinFirmaDigital": true,
+  "radicadoElectronico": true,
+  "inicioVigencia": "2018-09-13T22:58:47.786Z",
+  "tipoSticker": "qr",
+  "finVigencia": "2019-09-13T22:58:47.786Z",
+  "ayuda": "Ayuda 1",
+  "estadoId": 1,
+  "flujoTrabajo": "/api/flujo_trabajos/1",
+  "grupos":[]
+}
+
+### PROCESAR ESTRCUTURA FORMULARIO
+POST {{baseUrl}}/formularios/{{id}}/procesarestructuramodelo
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="imagen"; filename="foto.png"
+Content-Type: image/png
+
+< ../../var/tmpFiles/foto.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+
+### test update
+PUT {{baseUrl}}/formularios/{{id}}
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "estadoId": 1
+}
+
+### Generar version formulario
+POST {{baseUrl}}/formularios/{{id}}/generateversion
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+### INACTIVAR FORMULARIO
+POST {{baseUrl}}/formularios/37/inactivate
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER CAMPOS BASICOS DE UN FORMULARIO
+GET {{baseUrl}}/formularios/2/campo_formularios
+Authorization: {{AuthorizationToken}}
+
+### OBTENER CAMPOS CAMPOS SIN OCULTAR AL RADICAR DE UN FORMULARIO
+GET {{baseUrl}}/formularios/2/load_campos_formulario
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER FORMULARIOS RELACIONADOS
+GET {{baseUrl}}/formularios/46/relacionados
+?query=base
+Authorization: {{AuthorizationToken}}

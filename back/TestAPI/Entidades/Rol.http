@@ -1,0 +1,52 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+### ROLES
+
+###OBTENER ROLES
+GET {{baseUrl}}/rols HTTP/1.1
+    ?query=
+    &order[nombre]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER ROL
+GET {{baseUrl}}/rols/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER COMPONENTES DE UN ROL
+GET {{baseUrl}}/rols/{{id}}/componentes HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER USUARIOS DE UN ROL
+GET {{baseUrl}}/rols/{{id}}/usuarios HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### NUEVO ROL
+POST {{baseUrl}}/rols HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombreRol": "Rol test 12!",
+  "estadoId": 1,
+  "componentes": [
+  		"/api/componentes/1",
+  		"/api/componentes/2"
+  ]
+}
+
+### ACTUALIZAR ROL
+PUT {{baseUrl}}/rols/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombreRol": "Rol test 1!",
+  "estadoId": 1,
+  "componentes": [
+  		"/api/componentes/4"
+  ]
+}

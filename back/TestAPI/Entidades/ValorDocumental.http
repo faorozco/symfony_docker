@@ -1,0 +1,19 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER VALORES DOCUMENTALES
+GET {{baseUrl}}/valor_documentals HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER VALORES DOCUMENTALES FILTRADOS
+GET {{baseUrl}}/valor_documentals HTTP/1.1
+    ?query=
+    &order[posicion]=asc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/valor_documentals/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

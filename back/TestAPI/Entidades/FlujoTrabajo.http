@@ -1,0 +1,21 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 10
+
+### OBTENER FLUJOS DE TRABAJO
+GET {{baseUrl}}/flujo_trabajos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER FLUJOS DE TRABAJO CON FILTROS
+GET {{baseUrl}}/flujo_trabajos HTTP/1.1
+  ?query=
+  &order[descripcion]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER FLUJO DE TRABAJO
+GET {{baseUrl}}/flujo_trabajos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

@@ -1,0 +1,21 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/formatos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVO
+GET {{baseUrl}}/formatos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###GENERAR PDF DE FORMATO
+GET {{baseUrl}}/formatos/{{id}}/generatepdf HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+###GENERAR PDF DE FORMATO
+POST {{baseUrl}}/formatos/{{id}}/store HTTP/1.1
+Authorization: {{AuthorizationToken}}

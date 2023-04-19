@@ -1,0 +1,57 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER CARGOS
+GET {{baseUrl}}/cargos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER ARCHIVOS CON FILTROS
+GET {{baseUrl}}/cargos HTTP/1.1
+  ?query=
+  &order[nombre]=asc
+  &page=1 
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER CARGO
+GET {{baseUrl}}/cargos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CREAR CARGO
+POST {{baseUrl}}/cargos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombre" : "cargo de prueba",
+  "estadoId" : 1
+}
+
+### ACTUALIZAR CARGO
+PUT {{baseUrl}}/cargos/8 HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "nombre" : "cargo de prueba 2",
+  "estadoId" : 1
+}
+
+### IMPORTAR CARGOS
+POST {{baseUrl}}/cargos/import HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="archivo"; filename="cargos.csv"
+Content-Type: text/csv
+
+< ../../var/tmpFiles/cargos.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### EXPORTAR CARGOS
+POST {{baseUrl}}/cargos/export HTTP/1.1
+Authorization: {{AuthorizationToken}}

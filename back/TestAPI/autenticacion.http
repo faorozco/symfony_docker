@@ -1,0 +1,39 @@
+@baseUrl = {{host}}
+
+### Autorización
+
+POST {{baseUrl}}/login_check HTTP/1.1
+Content-Type: application/json
+
+{
+    "login":"smejia",
+    "clave":"12345"
+}
+
+
+### Autorización usuario1
+
+POST {{baseUrl}}/login_check HTTP/1.1
+Content-Type: application/json
+
+{
+    "login":"usuario1",
+    "clave":"54321"
+}
+
+
+### Autorización usuario1
+
+POST {{baseUrl}}/token/refresh HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+refresh_token=39c67686a6c44d8885953bcc17f0100d7a24605764d1b8be97acdf15963dbbb1b4a4db04358ecb2ca4881379715242d42baf2debef8dd95e72207f450f51ff32
+
+### Autorización usuario1
+
+POST {{baseUrl}}/token/refresh HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh_token":"9aa72aba525a551224a05dee3e2ffdd2fef8bf44f09f35ecc4906df78fc4106c9d0a6e5b8a6a8b240380d71e1668db168e8ded63ad90d898cc3a95664bf01f31"
+}

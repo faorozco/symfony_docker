@@ -1,0 +1,21 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+### OBTENER LISTAS
+@id=1
+GET {{baseUrl}}/listas HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER LISTAS FILTRADAS
+@id=1
+GET {{baseUrl}}/listas HTTP/1.1
+    ?query=
+    &order[nombre]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER UNA LISTA
+@id=1
+GET {{baseUrl}}/listas/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}

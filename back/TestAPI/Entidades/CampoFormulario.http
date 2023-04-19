@@ -1,0 +1,79 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 136
+
+### OBTENER CAMPOS FORMULARIO
+GET {{baseUrl}}/campo_formularios
+Authorization: {{AuthorizationToken}}
+
+### OBTENER CAMPO FORMULARIO
+GET {{baseUrl}}/campo_formularios/4
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER VALORES RELACIONADOS A UN CAMPO TIPO ENTIDAD
+GET {{baseUrl}}/campo_formularios/{{id}}/listFields
+    ?query=
+    &page=1
+    &
+Authorization: {{AuthorizationToken}}
+
+
+### OBTENER VALORES RELACIONADOS A UN CAMPO TIPO FORMULARIO
+GET {{baseUrl}}/campo_formularios/{{id}}/getformfieldsvalues
+    ?query=
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+### TODO: Validar bien los campos INT con valores iniciales en NULL
+### NUEVO CAMPO FORMULARIO
+POST {{baseUrl}}/campo_formularios
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "tipoCampo":"NumericoEntero",
+   "longitud":"9999999999",
+   "valorDefecto":"",
+   "valorMinimo":0,
+   "mostrarFront":true,
+   "imprimeSticker":true,
+   "valorCuadroTexto":"Prueba",
+   "posicion":10,
+   "posicionFront":10,
+   "obligatorio":false,
+   "ayuda":"Ayuda",
+   "indice":false,
+   "ocultoAlRadicar":false,
+   "formulario":"/api/formularios/2",
+   "estadoId":1
+}
+
+### TODO: Validar bien los campos INT con valores iniciales en NULL
+### NUEVO CAMPO FORMULARIO
+PUT {{baseUrl}}/campo_formularios/7
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+   "tipoCampo":"Formulario",
+   "longitud":null,
+   "valorDefecto":"",
+   "mostrarFront":true,
+   "imprimeSticker":true,
+   "valorCuadroTexto":"empleado",
+   "posicion":1,
+   "posicionFront":1,
+   "posicionSticker":1,
+   "obligatorio":true,
+   "ayuda":"N / A 1",
+   "indice":false,
+   "ocultoAlRadicar":false,
+   "formularioId":2,
+   "campoFormularioId":1,
+   "estadoId":1
+}
+### OBTENER CAMPO FORMULARIO
+GET {{baseUrl}}/campo_formularios/1/formulario
+Authorization: {{AuthorizationToken}}

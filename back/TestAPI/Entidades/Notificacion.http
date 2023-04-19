@@ -1,0 +1,61 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 23
+### ROLES
+
+###OBTENER NOTIFICACIONES NOTIFICADAS POR USUARIO
+GET {{baseUrl}}/notificados/user HTTP/1.1
+    ?page=1
+    &order[id]=desc    
+Authorizat ion: {{AuthorizationToken}}
+
+###ACTUALIZAR NOTIFICACION
+PUT {{baseUrl}}/notificacions/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER NOTIFICACION NOTIFICADA
+GET {{baseUrl}}/notificados/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###OBTENER NOTIFICACIONES
+GET {{baseUrl}}/notificacions HTTP/1.1
+    ?query=
+    &order[nombre_sede]=desc
+    &page=1
+Authorization: {{AuthorizationToken}}
+
+
+###OBTENER NOTIFICACION
+GET {{baseUrl}}/notificacions/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+###NUEVA NOTIFICACION
+POST {{baseUrl}}/notificacions HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+    "registro":"api/registros/13",
+    "contenido":"prueba notificaciòn custom",
+    "para":"[1]",
+    "notificado":false,
+    "estadoId":1
+}
+
+###MARCAR NOTIFICACION COMO VISTA
+POST {{baseUrl}}/notificados/{{id}}/seen HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+
+###PROCESAR PRESELECCIONADOS
+POST {{baseUrl}}/notificacions/preselected/process HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+{
+    "type": "usuario",
+    "selected": [
+        "1",
+        "2"
+    ]
+}

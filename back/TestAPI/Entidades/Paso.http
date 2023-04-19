@@ -1,0 +1,66 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER PASO
+GET {{baseUrl}}/pasos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER PASOS
+GET {{baseUrl}}/pasos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### CREAR PASO
+POST {{baseUrl}}/pasos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "plazo": 120,
+  "prioridad": 0,
+  "descripcion": "auditoria 1",
+  "flujoTrabajoId": 2,
+  "estadoId": 1,
+  "flujoTrabajo": "/api/flujo_trabajos/2",
+  "time": "H",
+  "numero": 1
+}
+
+### ACTUALIZAR PASO
+PUT {{baseUrl}}/pasos/41 HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "plazo": 87600,
+  "prioridad": 0,
+  "descripcion": "Auditoria 1 update",
+  "flujoTrabajoId": 2,
+  "estadoId": 1,
+  "flujoTrabajo": "/api/flujo_trabajos/2",
+  "time": "H",
+  "numero": 1
+}
+
+
+### CONSULTAR EVENTOS
+POST {{baseUrl}}/eventos/config_event?paso=1 HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "paso_id": "5",
+  "event_id": "10"
+}
+
+### CREAR EVENTOS
+POST {{baseUrl}}/eventos/create_event HTTP/1.1
+Authorization: {{AuthorizationToken}}
+Content-Type: application/json
+
+{
+  "paso_id": 5,
+  "event_id": 10,
+  "config": { "user": "Juan Carlos Patiño Hernandez"}
+}

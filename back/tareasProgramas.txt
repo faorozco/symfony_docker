@@ -1,0 +1,9 @@
+## TAREAS PROGRAMADAS GDOCUMENT
+# Se encarga de enviar los mensajes de los radicados que han sido marcados para compartir por correo electrónico
+*/1 * * * * /usr/bin/php /home/carlos/www/gdocumentBack/bin/console gdocument:send-mail >/dev/null 2>&1
+
+# Se encarga de notificar los radicados.
+*/1 * * * * /usr/bin/php /home/carlos/www/gdocumentBack/bin/console gdocument:notify >/dev/null 2>&1
+
+# Elimina todo el contenido de las carpetas temporales del sistema
+59 23 * * * /usr/bin/php /home/carlos/www/gdocumentBack/bin/console gdocument:garbage-collector >/dev/null 2>&1

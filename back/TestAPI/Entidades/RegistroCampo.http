@@ -1,0 +1,16 @@
+@AuthorizationToken = {{token}}
+@baseUrl = {{host}}
+
+@id = 1
+
+### OBTENER REGISTROS DE TIPO CAMPO
+GET {{baseUrl}}/registro_campos HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER REGISTRO DE TIPO CAMPO
+GET {{baseUrl}}/registro_campos/{{id}} HTTP/1.1
+Authorization: {{AuthorizationToken}}
+
+### OBTENER REGISTROS DE FORM
+GET {{baseUrl}}/registros/3/campos HTTP/1.1
+Authorization: {{AuthorizationToken}}

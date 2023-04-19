@@ -1,0 +1,24 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+##Delete symfony local:server:stop
+/src/Migrations/*
+
+/public/tmp/
+/tmp
+
+/config/gdrivecredentials/credenciales/credentials.json
+/config/gdrivecredentials/client_secret.json
+
+/.idea/
+.DS_Store
+.prod
